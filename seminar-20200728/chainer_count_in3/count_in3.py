@@ -12,9 +12,9 @@ class MyChain(chainer.Chain) :
   def __init__(self) :
     super(MyChain, self).__init__()
     with self.init_scope() :
-      self.l1 = L.Linear(None, 11)
-      self.l2 = L.Linear(None, 7)
-      self.l3 = L.Linear(None, 2)
+      self.l1 = L.Linear(None, 10)
+      self.l2 = L.Linear(None, 6)
+      self.l3 = L.Linear(None, 4)
   def __call__(self, x) :
     h1 = F.relu(self.l1(x))
     h2 = F.relu(self.l2(h1))
@@ -31,7 +31,7 @@ for l in lines :
   data.append(list(map(int, d)))
 
 data = np.array(data, dtype = np.int32)
-trainx, trainy = np.hsplit(data, [2])
+trainx, trainy = np.hsplit(data, [3])
 trainy = trainy[:, 0]
 trainx = np.array(trainx, dtype = np.float32)
 traint = np.array(trainy, dtype = np.int32)
@@ -54,7 +54,7 @@ test_iter = chainer.iterators.SerialIterator(test, batchsize, repeat=False, shuf
 updater = training.StandardUpdater(train_iter, optimizer)
 
 # トレーナの登録
-epoch = 500
+epoch = 1000
 trainer = training.Trainer(updater, (epoch, 'epoch'))
 
 # 学習状況の表示や保存

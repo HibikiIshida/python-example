@@ -5,3 +5,5 @@ sklearn
 mglearn
 pandas
 chainer
+pillow
+opencv-python
